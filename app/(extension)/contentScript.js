@@ -1,0 +1,67 @@
+// Use a dynamic import as a work-around to content scripts not supporting JS modules (ES6)
+// (async () => {
+//     console.log("hji");
+//     const src = chrome.runtime.getURL('./src/contentScripts/index.js');
+//     console.log(src);
+//     const contentScript = await import(src);
+//     contentScript.initialize();
+// })();
+
+// (async() => {
+//     await import('./src/contentScripts/index.js').then((res) => {
+//         console.log(res);
+//     })
+// })();
+
+// Trong file contentScript.js
+// 'use strict';
+// import initialize from "./src/contentScripts/index.js";
+// initialize();
+
+(async () => {
+  const src = chrome.runtime.getURL('src/contentScripts/index.js');
+  const contentScript = await import(src);
+  contentScript.initialize();
+})();
+// function importDynamicModule(modulePath) {
+//     const extensionURL = chrome.runtime.getURL('');
+//     const fullModulePath = new URL(modulePath, extensionURL).toString();
+//     return import(fullModulePath);
+//   }
+//   console.log("hu");
+//   // Sử dụng hàm trung gian để nhập động module
+//   importDynamicModule('src/contentScripts/index.js')
+//     .then((module) => {
+//       // Mã của bạn ở đây
+//     })
+//     .catch((error) => console.error('Lỗi nhập động:', error));
+  
+
+
+
+// (async () => {
+    
+// })();
+// import initialize from './src/contentScripts/index.js';
+// async function test () {
+//     const src = chrome.runtime.getURL('./src/contentScripts/index.js');
+//     const contentScript = await import(src);
+//     contentScript.initialize();
+// }
+// test()
+// initialize();
+{/* <script type="module" src="./src/contentScripts/index.js" /> */}
+
+// import('./src/contentScripts/index.js')
+//   .then((module) => {
+//     console.log(module);
+//   })
+//   .catch((error) => console.error('Lỗi nhập động:', error));
+
+// const moduleURL = chrome.runtime.getURL('./src/contentScripts/index.js');
+// import(moduleURL)
+//   .then((module) => {
+//     // Mã của bạn ở đây
+//   })
+//   .catch((error) => console.error('Lỗi nhập động:', error));
+

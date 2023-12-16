@@ -1,0 +1,26 @@
+[
+    {
+        "id": "35wl5neo2f",
+        "username": "user1",
+        "date": "2023-12-05",
+        "website_address": "https://example1.com",
+        "description": "Description for user1",
+        "preview_image": "https://example1.com/preview.jpg"
+    },
+    {
+        "id": "l0tssoqm8i",
+        "username": "user2",
+        "date": "2023-12-06",
+        "website_address": "https://example2.com",
+        "description": "Description for user2",
+        "preview_image": "https://example2.com/preview.jpg"
+    },
+    {
+        "id": "p8e6iki30i",
+        "username": "user3",
+        "date": "2023-12-07",
+        "website_address": "https://example3.com",
+        "description": "Description for user3",
+        "preview_image": "https://example3.com/preview.jpg"
+    }
+]

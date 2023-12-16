@@ -1,0 +1,249 @@
+.highlighter--highlighted.highlighter--hovered {
+  box-shadow: 0 1px 0 grey;
+}
+
+#highlighter--hover-tools {
+  position: fixed;
+  padding-bottom: 8px;
+  z-index: 10000;
+}
+
+#highlighter--hover-tools--container {
+  position: relative;
+  border-radius: 5px;
+  padding: 1px 0;
+  background-color: #f0f0f0;
+  width: 180px; /* When changing this, also update moveToolbarToHighlight() in hoverTools.js */
+  height: 37px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.25));
+}
+
+.highlighter--icon {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.highlighter--note {
+  position: absolute;
+  top: 70px;
+  width: fit-content;
+  padding-top: 6px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #f0f0f0;
+  color: grey;
+  border-radius: 10px;
+}
+
+.highlighter--note input {
+  margin-top: 3px;
+  width: 300px;
+  font-size: medium;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  color: #f0f0f0;
+  padding: 15px 10px;
+  background-color: grey;
+  border-radius: 10px;
+}
+
+.highlighter--translate {
+  display: none;
+  position: absolute;
+  bottom: 40px;
+  max-width: 300px;
+  word-wrap: break-word;
+  background-color: white;
+  color: black;
+  border: 1.5px solid rgb(187, 187, 187);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.highlighter--icon:hover {
+  filter: opacity(0.92);
+}
+
+.highlighter--icon-copy {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/file_copy.svg");
+}
+
+.highlighter--icon-delete {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/delete.svg");
+}
+
+.highlighter--icon-change-color {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/color_lens.svg");
+}
+
+.highlighter--icon-translate {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/translation.svg");
+}
+
+.highlighter--icon-add-to-category {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/add-to-category.svg");
+}
+
+#overlay-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: none;
+}
+
+#overlay-content {
+  font-size: 14px;
+  color: #333;
+}
+
+#overlay-options {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.overlay-button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.highlight-icon {
+  position: absolute;
+  display: none;
+  width: 2rem;
+  height: 2rem;
+  padding: 8px;
+  cursor: pointer;
+}
+.highlight-icon::after {
+  content: "✒️";
+  padding: 3px;
+  font-size: 22px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
+}
+.highlight-focus {
+  position: absolute;
+  display: none;
+  width: 5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  padding: 8px;
+  background-color: rgb(226, 226, 226);
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+}
+.additional-info {
+  cursor: pointer;
+  position: absolute;
+  width: 100px;
+  height: 90px;
+  display: none;
+  padding-top: 5px;
+  top: -90.5px;
+  left: 0;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+}
+.highlight-icon:hover .additional-info {
+  display: block;
+}
+/* .highlighted-text{
+      background: #4caf50;
+    } */
+.square {
+  width: 20%;
+  height: 20%;
+  border-radius: 5px;
+  margin: 2px;
+  display: inline-block;
+}
+
+.edit-square {
+  display: inline-block;
+  gap: 5px;
+}
+
+.delete-square {
+  display: inline-block;
+  gap: 5px;
+}
+
+.util-option {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1.5px solid rgb(187, 187, 187);
+  top: 0px;
+  left: 42px;
+  border-radius: 10px;
+  padding: 10px;
+  width: max-content;
+  height: fit-content;
+}
+
+.util-option > * {
+  width: 100%;
+  font-size: 14px;
+  font-weight: bolder;
+  text-align: left;
+  margin: auto;
+}
+
+.util-option > *:hover {
+  text-decoration: underline rgb(33, 83, 190);
+  color: rgb(33, 83, 190);
+}
+
+/* Color picker icon */
+.gg-add {
+  color: black;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid;
+  transform: scale(var(--ggs, 1));
+  border-radius: 16px;
+}
+
+.gg-add::after,
+.gg-add::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 5px;
+  top: 5px;
+  left: 2px;
+}
+
+.gg-add::after {
+  width: 2px;
+  height: 8px;
+  top: 2px;
+  left: 5px;
+}

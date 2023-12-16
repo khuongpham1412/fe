@@ -1,0 +1,237 @@
+:root {
+  --gray: #515158;
+  --gray_white: #ededed;
+  --blue: #24c7f0;
+  --lighter_gray: #737475;
+  --smoke: #ececec;
+  --gray_smoke: #efefef;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+.container {
+  width: 380px;
+  height: 550px;
+  padding: 0 10px;
+}
+
+.home-setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.setting {
+  cursor: pointer;
+}
+
+.menu-container {
+  display: none;
+  position: absolute;
+  width: 180px;
+  height: 130px;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  border: 1px solid var(--smoke);
+  border-radius: 10px;
+  color: black;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 3px 30px 0px;
+  padding: 10px;
+}
+
+.menu-content {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  fill: black;
+}
+
+.switch-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  fill: black;
+  overflow: hidden;
+}
+
+.menu-content:hover {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  fill: white;
+}
+
+.home-navigator {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 12px;
+  color: var(--blue);
+  font-size: medium;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.home-icon {
+  padding: 3px 5px;
+  text-align: center;
+  border: 1px solid var(--gray_smoke);
+  border-radius: 8px;
+  background-color: var(--gray_smoke);
+  filter: invert(100%) sepia(0%) saturate(7461%) hue-rotate(40deg)
+    brightness(109%) contrast(110%);
+}
+
+.home-text {
+  text-decoration: none;
+}
+
+.content-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: medium;
+}
+
+.bookmark-btn,
+.note-btn {
+  width: 100%;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  color: var(--gray);
+  border: 0px solid white;
+}
+
+.bookmark-btn:hover,
+.note-btn:hover {
+  color: black;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.active {
+  border: 1px solid var(--smoke);
+  color: black;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 3px 30px 0px;
+}
+
+.bookmark-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px 0;
+}
+
+.url-container {
+  padding: 7px;
+  color: black;
+  font-size: 14px;
+  cursor: pointer;
+  border-left: 5px solid black;
+}
+
+.note-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px 0;
+}
+
+.note-container {
+  padding: 7px;
+  color: black;
+  font-size: 14px;
+  cursor: pointer;
+  border-left: 5px solid black;
+}
+
+/* CSS for the switch */
+.switch {
+  --button-width: 2.6em;
+  --button-height: 1.5em;
+  --toggle-diameter: 1.1em;
+  --button-toggle-offset: calc(
+    (var(--button-height) - var(--toggle-diameter)) / 2
+  );
+  --toggle-shadow-offset: 10px;
+  --toggle-wider: 2.4em;
+  --color-grey: #cccccc;
+  --color-green: #4296f4;
+}
+
+.slider {
+  display: inline-block;
+  width: var(--button-width);
+  height: var(--button-height);
+  background-color: var(--color-grey);
+  border-radius: calc(var(--button-height) / 2);
+  position: relative;
+  transition: 0.3s all ease-in-out;
+  cursor: pointer;
+}
+
+.slider::after {
+  content: "";
+  display: inline-block;
+  width: var(--toggle-diameter);
+  height: var(--toggle-diameter);
+  background-color: #fff;
+  border-radius: calc(var(--toggle-diameter) / 2);
+  position: absolute;
+  top: var(--button-toggle-offset);
+  transform: translateX(var(--button-toggle-offset));
+  box-shadow: var(--toggle-shadow-offset) 0
+    calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
+  transition: 0.3s all ease-in-out;
+}
+
+.switch input[type="checkbox"]:checked + .slider {
+  background-color: var(--color-green);
+}
+
+.switch input[type="checkbox"]:checked + .slider::after {
+  transform: translateX(
+    calc(
+      var(--button-width) - var(--toggle-diameter) - var(--button-toggle-offset)
+    )
+  );
+  box-shadow: calc(var(--toggle-shadow-offset) * -1) 0
+    calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
+}
+
+.switch input[type="checkbox"] {
+  display: none;
+}
+
+.switch input[type="checkbox"]:active + .slider::after {
+  width: var(--toggle-wider);
+}
+
+.switch input[type="checkbox"]:checked:active + .slider::after {
+  transform: translateX(
+    calc(
+      var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)
+    )
+  );
+}
+
+/* CSS for the switch */

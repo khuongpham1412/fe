@@ -1,0 +1,91 @@
+{
+  "manifest_version": 3,
+  "name": "Highlighter",
+  "description": "Highlight text on websites with a simple right-click or keyboard shortcut. Saves highlights on your device.",
+  "version": "4.0.5",
+  "icons": {
+      "16": "images/16.png",
+      "48": "images/48.png",
+      "128": "images/128.png"
+  },
+  "action": {
+      "default_icon": {
+          "16": "images/16.png",
+          "48": "images/48.png",
+          "128": "images/128.png"
+      },
+      "default_popup": "popup.html"
+  },
+  "content_scripts": [
+      {
+        "matches": [
+            "<all_urls>"
+        ],
+        "js": [
+            "lib/jquery-2.1.3.min.js",
+            "contentScript.js"
+        ],
+        "css": [
+            "src/contentScripts/hoverTools/index.css"
+        ],
+        "all_frames": true,
+        "type":"module"
+      }
+  ],
+  "background": {
+      "service_worker": "background.js",
+      "type": "module"
+  },
+  "commands": {
+      "execute-highlight": {
+          "suggested_key": {
+              "default": "Alt+H",
+              "mac": "MacCtrl+H"
+          },
+          "description": "Highlight selected text"
+      },
+      "toggle-highlighter-cursor": {
+          "description": "Toggle the highlighter cursor"
+      },
+      "change-color-to-yellow": {
+          "description": "Change highlighter color to yellow"
+      },
+      "change-color-to-cyan": {
+          "description": "Change highlighter color to blue"
+      },
+      "change-color-to-lime": {
+          "description": "Change highlighter color to green"
+      },
+      "change-color-to-magenta": {
+          "description": "Change highlighter color to pink"
+      },
+      "change-color-to-dark": {
+          "description": "Change highlighter color to dark"
+      }
+  },
+  "permissions": [
+      "activeTab",
+      "contextMenus",
+      "scripting",
+      "storage"
+  ],
+  "host_permissions": [
+      "<all_urls>"
+  ],
+  "web_accessible_resources": [
+      {
+          "resources": [
+              "images/*.png",
+              "images/*.svg",
+              "src/contentScripts/index.js",
+              "src/contentScripts/*"
+          ],
+          "matches": [
+              "<all_urls>"
+          ]
+      }
+  ],
+  "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

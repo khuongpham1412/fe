@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: theme("borderColor.DEFAULT", currentColor); /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: "";
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  margin: 0;
+  padding: 0;
+}
+
+.avatar {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-right: 5px;
+  overflow-clip-margin: "content-box";
+  overflow: "clip";
+}
+
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+
+.tags {
+  width: 60%;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tags .tag {
+  padding: 1px 6px;
+  cursor: pointer;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  background-color: rgb(242, 242, 242);
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.heart-icon {
+  font-size: 60px;
+  color: black;
+}
