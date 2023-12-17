@@ -3,39 +3,43 @@ import { HeartFilled } from "@ant-design/icons";
 import { Avatar, Card, Space } from "antd";
 import React, { useState } from "react";
 import Image from "next/image";
+import { Bookmark } from "../typpes/bookmark.type";
 
-interface SharingBookmarkProps {
-  username: string;
-  avatarUser: string;
-  title: string;
-  date: string;
-  content: string;
-  likeCount: number;
-  isLiked: boolean;
-  listAvatar: string[];
-  listTag: string[];
-  link_preview: string;
-}
+// interface SharingBookmarkProps {
+//   username: string;
+//   avatarUser: string;
+//   title: string;
+//   date: string;
+//   content: string;
+//   likeCount: number;
+//   isLiked: boolean;
+//   listAvatar: string[];
+//   listTag: string[];
+//   link_preview: string;
+// }
 
-const SharingBookmarkComponent: React.FC<{ data: SharingBookmarkProps }> = ({ data }) => {
+const SharingBookmarkComponent: React.FC<{ data: Bookmark }> = ({ data }) => {
   const {
-    username,
-    avatarUser,
+    alias,
+    countHighlight,
+    countNote,
+    created,
+    description,
+    folderId,
+    id,
+    image,
+    likes,
+    status,
     title,
-    date,
-    content,
-    likeCount,
-    isLiked,
-    listAvatar,
-    listTag,
-    link_preview,
+    updated,
+    url,
   } = data;
-  const [liked, setLiked] = useState<boolean>(isLiked);
-  const [likeCountState, setLikeCountState] = useState<number>(likeCount);
+  // const [liked, setLiked] = useState<boolean>(isLiked);
+  // const [likeCountState, setLikeCountState] = useState<number>(likeCount);
 
   const handleLike = () => {
-    setLiked((prev) => !prev);
-    setLikeCountState((prevCount) => (liked ? prevCount - 1 : prevCount + 1));
+    // setLiked((prev) => !prev);
+    // setLikeCountState((prevCount) => (liked ? prevCount - 1 : prevCount + 1));
     // You may want to send a request to update the server with the new like status and count
   };
 
@@ -43,22 +47,22 @@ const SharingBookmarkComponent: React.FC<{ data: SharingBookmarkProps }> = ({ da
     <Card
       title={
         <Space>
-          <Avatar src={avatarUser} />
-          <div>{username}</div>
-          <div className="date text-xs text-gray-400">{date}</div>
+          <Avatar src="avater user" />
+          <div>username</div>
+          <div className="date text-xs text-gray-400">{created}</div>
         </Space>
       }
       className="sm:min-w-[100px] md:min-w-[200px] lg:min-w-[300px] xl:min-w-[600px]"
       hoverable
     >
       <div className="text-2xl font-semibold mb-3">{title}</div>
-      <div>{content}</div>
+      <div>{title}</div>
       <Space className="mt-5">
-        <HeartFilled
+        {/* <HeartFilled
           className={`text-lg ${liked ? "text-rose-500" : ""}`}
           onClick={handleLike}
-        />
-        {listAvatar.map((avatar, index) => (
+        /> */}
+        {/* {listAvatar.map((avatar, index) => (
           <Image
             key={index}
             className="avatar"
@@ -69,16 +73,14 @@ const SharingBookmarkComponent: React.FC<{ data: SharingBookmarkProps }> = ({ da
             }}
             alt={`Avatar ${index + 1}`}
           />
-        ))}
+        ))} */}
         <div>
-          {likeCountState} {likeCountState === 1 ? "like" : "likes"}
+          {/* {likeCountState} {likeCountState === 1 ? "like" : "likes"} */}
         </div>
       </Space>
-      <p className="w-full h-15 text-xs text-gray-600 animate-pulse">
-        {link_preview}
-      </p>
+      <p className="w-full h-15 text-xs text-gray-600 animate-pulse">{url}</p>
 
-      <div className="tags">
+      {/* <div className="tags">
         {listTag.slice(0, 2).map((tag, index) => (
           <span key={index} className="tag">
             {tag}
@@ -87,7 +89,7 @@ const SharingBookmarkComponent: React.FC<{ data: SharingBookmarkProps }> = ({ da
         {listTag.length > 2 && (
           <span className="tag">{listTag.length - 2} more</span>
         )}
-      </div>
+      </div> */}
     </Card>
   );
 };

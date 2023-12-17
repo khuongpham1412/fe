@@ -7,6 +7,7 @@ import {
 import {
   createBookmark,
   getAllBookmarks,
+  getAllBookmarksSharedByOrthers,
 } from "../../services/bookmark.service";
 import { AxiosResponse } from "axios";
 import { DataResponse } from "@/app/typpes/data-response.type";
@@ -37,6 +38,13 @@ export const getAllBookmarksAsync = createAsyncThunk<
   return response;
 });
 
+export const getAllBookmarksSharedByOrthersAsync = createAsyncThunk<
+  AxiosResponse<DataResponse<GetAllBookMarksResponse>>
+>("bookmarks/fetch", async () => {
+  const response = await getAllBookmarksSharedByOrthers();
+  return response;
+});
+
 export const createBookmarkAsync = createAsyncThunk(
   "bookmark/create",
   async (bookmark: BookmarkCreateResponse) => {
@@ -51,7 +59,7 @@ export const bookmarkSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
-    //fetch
+    // Get all bookmarks
     builder.addCase(getAllBookmarksAsync.pending, (state) => {
       state.pending = true;
       state.status = "loading";
@@ -66,6 +74,28 @@ export const bookmarkSlice = createSlice({
       state.status = "error";
     });
 
+    // Get all bookmark is shared by orthers
+    builder.addCase(getAllBookmarksSharedByOrthersAsync.pending, (state) => {
+      state.pending = true;
+      state.status = "loading";
+    });
+    builder.addCase(
+      getAllBookmarksSharedByOrthersAsync.fulfilled,
+      (state, { payload }) => {
+        state.pending = false;
+        state.status = "finished";
+        state.data.data.bookmarks = payload.data.data.bookmarks;
+      }
+    );
+    builder.addCase(
+      getAllBookmarksSharedByOrthersAsync.rejected,
+      (state, { payload }) => {
+        state.pending = false;
+        state.status = "error";
+      }
+    );
+
+    // Create new bookmark
     builder.addCase(createBookmarkAsync.pending, (state) => {
       state.pending = true;
       state.status = "loading";

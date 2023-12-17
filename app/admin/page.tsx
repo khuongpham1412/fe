@@ -7,6 +7,7 @@ import { getAllBookmarksAsync } from "@/app/redux/features/bookmark-slice";
 import { Bookmark } from "@/app/typpes/bookmark.type";
 import { BookmarkComponent } from "@/app/components/bookmark-component";
 import HighlightComponent from "@/app/components/highlight-component";
+import CreateFolder from "../components/createFolder";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -31,6 +32,7 @@ export default function Home() {
       >
         <div className="flex justify-center flex-col items-center my-10 ">
           <BookmarkComponent data={bookmarks} />
+          <CreateFolder title="Test" key="1"/>
         </div>
       </Col>
       <Col

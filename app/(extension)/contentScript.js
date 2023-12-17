@@ -1,28 +1,20 @@
-// Use a dynamic import as a work-around to content scripts not supporting JS modules (ES6)
 // (async () => {
-//     console.log("hji");
-//     const src = chrome.runtime.getURL('./src/contentScripts/index.js');
-//     console.log(src);
-//     const contentScript = await import(src);
-//     contentScript.initialize();
+//   const src = chrome.runtime.getURL('src/contentScripts/index.js');
+//   const contentScript = await import(src);
+//   contentScript.initialize();
 // })();
 
-// (async() => {
-//     await import('./src/contentScripts/index.js').then((res) => {
-//         console.log(res);
-//     })
-// })();
 
-// Trong file contentScript.js
-// 'use strict';
-// import initialize from "./src/contentScripts/index.js";
-// initialize();
 
-(async () => {
-  const src = chrome.runtime.getURL('src/contentScripts/index.js');
-  const contentScript = await import(src);
-  contentScript.initialize();
-})();
+chrome.runtime.sendMessage(
+  {
+    action: "callApi",
+    url: "http://localhost:8000/bookmarks",
+  },
+  function (response) {
+    console.log(response);
+  }
+);
 // function importDynamicModule(modulePath) {
 //     const extensionURL = chrome.runtime.getURL('');
 //     const fullModulePath = new URL(modulePath, extensionURL).toString();

@@ -18,6 +18,10 @@ export const getAllBookmarksByFolderId = (folderId: number | string) => {
   });
 };
 
+export const getAllBookmarksSharedByOrthers = () => {
+  return https.get<DataResponse<GetAllBookMarksResponse>>("bookmarks/explore");
+};
+
 // export const getAllBookmarksById = (id: number | string) => {
 //   return https.get<Bookmark>(`bookmark/${id}`);
 // };
