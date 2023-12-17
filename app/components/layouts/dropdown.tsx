@@ -7,15 +7,20 @@ import {
   FolderAddFilled,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Dropdown, Space, Popover } from "antd";
+import { Dropdown, Space } from "antd";
 
-const DropdownMenu: React.FC = () => {
+interface DropdownMenuProps {
+  onExportPDF: () => void;
+  onExportHTML: () => void;
+}
+
+const DropdownMenu: React.FC<DropdownMenuProps> = ({ onExportPDF, onExportHTML }) => {
   const items: MenuProps["items"] = [
     {
       label: (
         <Space>
           <FilePdfOutlined />
-          <span>Export to PDF</span>
+          <span onClick={onExportPDF}>Export to PDF</span>
         </Space>
       ),
       key: "0",
@@ -42,7 +47,7 @@ const DropdownMenu: React.FC = () => {
       label: (
         <Space>
           <Html5Outlined />
-          <span>Export to HTML</span>
+          <span onClick={onExportHTML}>Export to HTML</span>
         </Space>
       ),
       key: "1",
@@ -60,7 +65,7 @@ const DropdownMenu: React.FC = () => {
       key: "3",
     },
   ];
-
+  
   return (
     <Dropdown menu={{ items }} trigger={["click"]}>
       <a onClick={(e) => e.preventDefault()}>

@@ -10,7 +10,7 @@ import {
 import { Button, Form, Input, Modal, Space, Tabs } from "antd";
 import type { TabsProps } from "antd";
 
-const LoginButton = () => {
+const LoginRegisterComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isValidForm, setFormValid] = useState<boolean>();
   const [loginForm] = Form.useForm();
@@ -233,4 +233,4 @@ const LoginButton = () => {
   );
 };
 
-export default LoginButton;
+export default LoginRegisterComponent;

@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "../components/post";
+import Post from "@/app/components/sharing-bookmark-component";
 
 let data = [
   {

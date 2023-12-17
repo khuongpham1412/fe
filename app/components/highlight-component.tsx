@@ -1,22 +1,26 @@
+import { useEffect, useRef } from "react";
 import {
   ClockCircleOutlined,
   DeleteOutlined,
   ShareAltOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import Image from "next/image";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import { Avatar, Card, Col, Empty, Layout, Row, Space } from "antd";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import DropdownMenu from "./dropdown";
-import { useAppDispatch, useAppSelector } from "../redux/hooks/hook";
-import { GetAllHighlightResponse, Highlight } from "../typpes/highlight.type";
-import Image from "next/image";
-import { getAllHighlightByBookmarkIdAsync } from "../redux/features/highlight-slice";
 
-function PageContent() {
+import DropdownMenu from "@/app/components/layouts/dropdown";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks/hook";
+import { GetAllHighlightResponse, Highlight } from "@/app/typpes/highlight.type";
+import { getAllHighlightByBookmarkIdAsync } from "@/app/redux/features/highlight-slice";
+
+function HighlightComponent() {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const bookmarkId = searchParams.get("id");
+  const pdfRef = useRef<HTMLDivElement>(null);
   const infoHighlightByBookmarkId: GetAllHighlightResponse = useAppSelector(
     (state) => state.highlight.data.data
   );
@@ -48,20 +52,61 @@ function PageContent() {
     }
   }, [bookmarkId]);
 
-  if (highlights) {
-    // Check if highlight is not null or undefined
-    // const highlightArray = Object.values(highlight);
-    // console.log(typeof highlightArray);
-    // Hoặc sử dụng Object.keys() và map():
-    // const highlightArray = Object.keys(highlight).map((key) => highlight[key]);
-    // console.log(highlightArray);
-  }
-
   const truncateText = (text: string, maxLength: number) => {
     if (text?.length > maxLength) {
       return text.substring(0, maxLength) + "...";
     }
     return text;
+  };
+
+  const handleExportPDF = () => {
+    const input = pdfRef.current;
+    html2canvas(input!).then((canvas) => {
+      const imgData = canvas.toDataURL(
+        "https://topdev.vn/blog/wp-content/uploads/2020/08/personal-projects.png"
+      );
+      const pdf = new jsPDF("p", "mm", "a4", true);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 30;
+      pdf.addImage(
+        imgData,
+        "PNG",
+        imgX,
+        imgY,
+        imgWidth * ratio,
+        imgHeight * ratio
+      );
+      pdf.save("test.pdf");
+    });
+  };
+
+  const handleExportHTML = () => {
+    if (pdfRef.current) {
+      const htmlContent = pdfRef.current.outerHTML;
+      console.log("Export to HTML clicked!");
+      console.log("HTML Content:", htmlContent);
+      exportHTMLToFile(htmlContent);
+    } else {
+      console.error("pdfRef is null");
+    }
+  };
+
+  const exportHTMLToFile = (htmlContent: string) => {
+    // Thực hiện các bước để xuất file HTML, ví dụ: sử dụng thư viện FileSaver.js
+    const blob = new Blob([htmlContent], { type: "text/html" });
+    const fileName = "exported_page.html";
+    const a = document.createElement("a");
+    a.href = window.URL.createObjectURL(blob);
+    a.download = fileName;
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   };
 
   function highlightText(
@@ -142,7 +187,7 @@ function PageContent() {
                   </div>
                 }
                 className="bg-white px-20 flex flex-col hover:bg-slate-50"
-                extra={<DropdownMenu />}
+                extra={<DropdownMenu onExportPDF={handleExportPDF} onExportHTML={handleExportHTML} />}
               >
                 <Row className=" justify-between flex-col">
                   <Col xs={24} sm={24} md={12} lg={8} xl={24}>
@@ -236,4 +281,4 @@ function PageContent() {
   );
 }
 
-export default PageContent;
+export default HighlightComponent;

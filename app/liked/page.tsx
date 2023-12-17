@@ -1,6 +1,7 @@
 import React from "react";
-import Post from "../components/post";
 import { HeartOutlined } from "@ant-design/icons";
+
+import Post from "@/app/components/sharing-bookmark-component";
 
 let data = [
   {

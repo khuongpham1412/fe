@@ -1,11 +1,12 @@
 "use client";
-import { CardComponent } from "@/app/components/card";
-import PageContent from "@/app/components/pagecontent";
-import { Col, Row } from "antd";
-import { useAppDispatch, useAppSelector } from "../redux/hooks/hook";
-import { getAllBookmarksAsync } from "../redux/features/bookmark-slice";
 import { useEffect } from "react";
-import { Bookmark } from "../typpes/bookmark.type";
+import { Col, Row } from "antd";
+
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks/hook";
+import { getAllBookmarksAsync } from "@/app/redux/features/bookmark-slice";
+import { Bookmark } from "@/app/typpes/bookmark.type";
+import { BookmarkComponent } from "@/app/components/bookmark-component";
+import HighlightComponent from "@/app/components/highlight-component";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -29,7 +30,7 @@ export default function Home() {
         span={10}
       >
         <div className="flex justify-center flex-col items-center my-10 ">
-          <CardComponent data={bookmarks} />
+          <BookmarkComponent data={bookmarks} />
         </div>
       </Col>
       <Col
@@ -42,7 +43,7 @@ export default function Home() {
           scrollbarColor: "#c5cae9",
         }}
       >
-        <PageContent />
+        <HighlightComponent />
       </Col>
     </Row>
   );

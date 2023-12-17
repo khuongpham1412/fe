@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import "./globals.css";
 import { Layout } from "antd";
-import LoginButton from "@/app/components/loginButton";
-import Navigation from "./components/menu";
-import { items } from "./enum";
-import { Providers } from "./redux/provider";
+import LoginRegisterComponent from "@/app/components/auth/login-register-component";
+import Navigation from "@/app/components/layouts/menu";
+import { items } from "@/app/enum";
+import { Providers } from "@/app/redux/provider";
 
 const { Sider } = Layout;
 
@@ -25,7 +25,7 @@ export default function RootLayout({
               collapsed={collapsed}
               onCollapse={(value) => setCollapsed(value)}
             >
-              <LoginButton />
+              <LoginRegisterComponent />
               <Navigation data={items} />
             </Sider>
             <Layout>{children}</Layout>

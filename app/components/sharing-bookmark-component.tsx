@@ -4,7 +4,7 @@ import { Avatar, Card, Space } from "antd";
 import React, { useState } from "react";
 import Image from "next/image";
 
-interface PostProps {
+interface SharingBookmarkProps {
   username: string;
   avatarUser: string;
   title: string;
@@ -17,7 +17,7 @@ interface PostProps {
   link_preview: string;
 }
 
-const Post: React.FC<{ data: PostProps }> = ({ data }) => {
+const SharingBookmarkComponent: React.FC<{ data: SharingBookmarkProps }> = ({ data }) => {
   const {
     username,
     avatarUser,
@@ -92,4 +92,4 @@ const Post: React.FC<{ data: PostProps }> = ({ data }) => {
   );
 };
 
-export default Post;
+export default SharingBookmarkComponent;

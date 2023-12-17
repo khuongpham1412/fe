@@ -1,33 +1,20 @@
-// 'use-client'
+'use-client'
 import { Card, Avatar, Row, Col } from "antd";
 import { ClockCircleOutlined, UserOutlined } from "@ant-design/icons";
 import { useRouter, useSearchParams } from "next/navigation";
-import DropdownMenu from "./dropdown";
 import Image from "next/image";
-import { DataResponse } from "../typpes/data-response.type";
-import { Bookmark } from "../typpes/bookmark.type";
-interface DataModel {
-  alias: string;
-  created_at: Date;
-  description: string;
-  folder_id: number;
-  id: string;
-  image: string;
-  status: number;
-  title: string;
-  updated_at: string;
-  url: string;
-}
 
-const CardComponent: React.FC<{ data: Bookmark[] }> = ({ data }) => {
+import DropdownMenu from "@/app/components/layouts/dropdown";
+import { Bookmark } from "@/app/typpes/bookmark.type";
+
+const BookmarkComponent: React.FC<{ data: Bookmark[] }> = ({ data }) => {
   if (!data) {
     return <div>No data available</div>;
   }
 
-  const maxLength = 50;
   const router = useRouter();
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const bookmarkId = searchParams.get("id");
 
   const truncateText = (text: string, maxLength: number) => {
     if (text.length > maxLength) {
@@ -49,8 +36,8 @@ const CardComponent: React.FC<{ data: Bookmark[] }> = ({ data }) => {
     return formattedDate;
   };
 
-  const handleClick = (id: string) => {
-    router.push(`admin?id=${id}`);
+  const handleEventSeeHighlightDetail = (bookmarkId: string) => {
+    router.push(`admin?id=${bookmarkId}`);
   };
 
   return (
@@ -80,13 +67,14 @@ const CardComponent: React.FC<{ data: Bookmark[] }> = ({ data }) => {
               </div>
             }
             className={`bg-white hover:bg-slate-50 ${
-              item.id.toString() === id?.toString() && "border-cyan-500 border-2"
+              item.id.toString() === bookmarkId?.toString() &&
+              "border-cyan-500 border-2"
             }`}
             extra={<DropdownMenu />}
           >
             <Row
               className="items-center justify-between"
-              onClick={() => handleClick(item.id.toString())}
+              onClick={() => handleEventSeeHighlightDetail(item.id.toString())}
             >
               <Col xs={24} sm={24} md={12} lg={8} xl={12}>
                 <h4 className="text-lg">{truncateText(item.title, 50)}</h4>
@@ -121,4 +109,4 @@ const CardComponent: React.FC<{ data: Bookmark[] }> = ({ data }) => {
     </Row>
   );
 };
-export { CardComponent };
+export { BookmarkComponent };
